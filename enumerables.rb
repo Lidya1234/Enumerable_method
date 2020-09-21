@@ -21,30 +21,23 @@ module Enumerable
     self
   end
 
-  def my_select1
-    return to_enum(:my_select1) unless block_given?
-   i=0
-    to_a.length - 1.times do
-      yield to_a[i]
-      i+=1
-    end
-  end
+
 
   def my_select
     return to_enum(:my_select) unless block_given?
 
-    new_arr = []
-    my_each { |item| new_arr << item if yield(item) }
-    new_arr
+    result = []
+    to_a.my_each { |item| result << item if yield(item) }
+    result
   end
 end
-[1, 2, 3, 4].my_each  do|x| 
-    puts x 
+ [1, 2, 3, 4].my_each  do|x| 
+     puts x 
 end
 [1, 2, 3, 4].my_each_with_index { |x, i| puts x.to_s + ':' + i.to_s if x != 3 }
 
-result_a = []  
-[1, 2, 3, 4].my_select1 do |x|
-    result_a.push(x)
+
+print ([5, 6, 7, 8].my_select do|item|
+  item!=6
 end
-puts result_a
+)
