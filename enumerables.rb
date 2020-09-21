@@ -73,12 +73,41 @@ module Enumerable
     end
     return !ans
   end
-
+   
+  def my_count(number = nil)
+ 
+    count = 0
+    if number.nil?
+     count = to_a.length
+    else
+    
+      my_each { |i| count += 1 if number == i }
+    
+      
+    print count
+    end
+  end
   
+  def my_map
+    return to_enum(:my_map) unless block_given?
+    result =[]
+    to_a.my_each {|item| result << item if yield item}
+    result
 end
 
+def my_inject(number=nil)
+  return to_enum(:my_inject) unless block_given? 
+  
+  if number.nil?
+    sum=0
+  else
+    sum=number
+  end  
+ to_a.my_each{|item| sum =yield item ,sum}
+  return sum
+end
 
-
+end
 
  [1, 2, 3, 4].my_each  do|x| 
      puts x 
@@ -94,3 +123,23 @@ end
 puts ["cat", "dog", "human"].my_all? { |word| word.length >= 4 }
 puts ["cat", "dog", "human"].my_any? { |word| word.length >= 3 }
 puts ["cat", "dog", "human"].my_none? { |word| word.length >= 6 }
+
+puts ([5,3,7,4,3,7].my_count(3))
+
+print ( [1,2,3,4,5,6,7].my_map do |item|
+  item >=4
+end
+)
+puts
+
+puts ([1,5,5,4].my_inject do |x ,sum|
+  sum=sum+x
+  sum
+end
+)
+
+puts ([1,2,5,4].my_inject(100) do |x ,sum|
+  sum=sum+x
+  sum
+end
+)
