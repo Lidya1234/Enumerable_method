@@ -3,7 +3,7 @@ module Enumerable
     return to_enum(:my_each) unless block_given?
 
     i = 0
-    while (i < to_a.length)
+    while i < to_a.length
       yield to_a[i]
       i += 1
     end
@@ -14,7 +14,7 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     i = 0
-    while (i < to_a.length)
+    while i < to_a.length
       yield to_a[i], i
       i += 1
     end
@@ -44,16 +44,14 @@ module Enumerable
 
     i = 0
     ans = false
-    (to_a.length).times do
+    to_a.length.times do
       ans = yield to_a[i]
 
-      if ans == true
-        break
-      end
+      break if ans == true
 
       i += 1
     end
-    return ans
+    ans
   end
 
   def my_none?
@@ -61,16 +59,14 @@ module Enumerable
 
     i = 0
     ans = false
-    (to_a.length).times do
+    to_a.length.times do
       ans = yield to_a[i]
 
-      if ans == true
-        break
-      end
+      break if ans == true
 
       i += 1
     end
-    return !ans
+    !ans
   end
 
   def my_count(number = nil)
@@ -92,7 +88,7 @@ module Enumerable
     result
   end
 
-  def my_inject(number = nil, symbol=nil)
+  def my_inject(number = nil, symbol = nil)
     # Symbol only
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
       array = to_a
@@ -105,18 +101,17 @@ module Enumerable
     # block only
     elsif block_given?
       total = 1
-      self.my_each do |i|
+      my_each do |i|
         total = yield(total, i)
       end
       total
     elsif !number.nil? && symbol.nil?
       array = to_a
       product = number
-      (array.length -1).times do |i|
+      array.length(-1).times do |i|
         product = array[i + 1].send(number[0], product)
       end
       product
-    else
     end
   end
 end
@@ -124,36 +119,36 @@ end
 # Multiply Method
 
 def multiply_els(array)
-  array.my_inject(:*) { |x, y| x * y}
+  array.my_inject(:*) { |x, y| x * y }
 end
 
 # Tests
 
-puts "--My Each"
+puts '--My Each'
 [1, 2, 3, 4].my_each { |x| puts x }
 
-puts "My Each With Index"
+puts 'My Each With Index'
 [1, 2, 3, 4].my_each_with_index { |x, i| puts x.to_s + ':' + i.to_s if x != 3 }
 
-puts "My Select"
-print ([5, 6, 7, 8].my_select { |item| item != 6 })
+puts 'My Select'
+print([5, 6, 7, 8].my_select { |item| item != 6 })
 puts
-puts "My All"
-puts ["cat", "dog", "human"].my_all? { |word| word.length >= 4 }
+puts 'My All'
+puts %w[cat dog human].my_all? { |word| word.length >= 4 }
 
-puts "My Any"
-puts ["cat", "dog", "human"].my_any? { |word| word.length >= 3 }
+puts 'My Any'
+puts %w[cat dog human].my_any? { |word| word.length >= 3 }
 
-puts "My none"
-puts ["cat", "dog", "human"].my_none? { |word| word.length >= 6 }
+puts 'My none'
+puts %w[cat dog human].my_none? { |word| word.length >= 6 }
 
-puts "My count"
-puts ([5, 3, 7, 4, 3, 7].my_count(3))
+puts 'My count'
+puts([5, 3, 7, 4, 3, 7].my_count(3))
 
-puts "My map"
+puts 'My map'
 
-print ( [1, 2, 3, 8, 9, 7].my_map Proc.new { |item| item >= 4 })
+print([1, 2, 3, 8, 9, 7].my_map(proc { |item| item >= 4 }))
 
 puts
-puts "Multiply_els"
+puts 'Multiply_els'
 print multiply_els([1, 5, 3])
