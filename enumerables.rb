@@ -31,8 +31,7 @@ module Enumerable
 
   def my_all?
     to_a.my_each do |i|
-      if yield(i) == false
-        return false
+      return false if yield(i) == false
       else
         return true
       end
@@ -134,13 +133,13 @@ puts 'My Select'
 print([5, 6, 7, 8].my_select { |item| item != 6 })
 puts
 puts 'My All'
-puts %w[cat dog human].my_all? { |word| word.length >= 4 }
+puts (%w[cat dog human].my_all? { |word| word.length >= 4 })
 
 puts 'My Any'
-puts %w[cat dog human].my_any? { |word| word.length >= 3 }
+puts (%w[cat dog human].my_any? { |word| word.length >= 3 })
 
 puts 'My none'
-puts %w[cat dog human].my_none? { |word| word.length >= 6 }
+puts (%w[cat dog human].my_none? { |word| word.length >= 6 })
 
 puts 'My count'
 puts([5, 3, 7, 4, 3, 7].my_count(3))
