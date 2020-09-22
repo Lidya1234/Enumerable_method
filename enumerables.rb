@@ -95,19 +95,38 @@ module Enumerable
     result
 end
 
-def my_inject(number=nil)
-  return to_enum(:my_inject) unless block_given? 
+def my_inject(number = nil, symbol=nil)
+    
   
-  if number.nil?
-    sum=0
-  else
-    sum=number
-  end  
- to_a.my_each{|item| sum =yield item ,sum}
-  return sum
+  # Symbol only
+   if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
+  array = to_a
+    product = array[0]
+    (array.length-1).times do |i|
+    product = array[i + 1].send(number[0], product)
+    end
+    product
+  
+
+# block only
+elsif block_given?
+         total = 1
+      self.my_each do |i|
+        total = yield(total, i)
+      end
+      total
+end
+end
+end
+   
+  
+
+
+def multiply_els(array)
+array.my_inject(:*) { |x , y| x * y}
 end
 
-end
+print multiply_els([1,5,3])
 
  [1, 2, 3, 4].my_each  do|x| 
      puts x 
@@ -143,3 +162,14 @@ puts ([1,2,5,4].my_inject(100) do |x ,sum|
   sum
 end
 )
+
+
+
+
+
+
+
+
+
+
+
