@@ -93,21 +93,21 @@ module Enumerable
     end
     total = 0
     if !block_given? && number.nil? && symbol.nil?
-      raise LocalJumpError.new
+      raise LocalJumpError
     elsif block_given?
       total = to_a[0]
-      total = number if !number.nil?
-      to_a.my_each { |i| total = yield total, i}
+      total = number unless number.nil?
+      to_a.my_each { |i| total = yield total, i }
       total
     elsif !symbol.nil? && number.nil?
       array = to_a
       product = 0
-      to_a.my_each { |i| product = product + i}
+      to_a.my_each { |i| product += i }
       product
     elsif !number.nil? && symbol.nil?
       array = to_a
       product = number
-      to_a.my_each { |i| product = yield i}
+      to_a.my_each { |i| product = yield i }
       product
 
     elsif !number.nil? && !symbol.nil?
@@ -139,13 +139,13 @@ puts 'My Select'
 print([5, 6, 7, 8].my_select { |item| item != 6 })
 puts
 puts 'My All'
-puts (%w[cat dog human].my_all? { |word| word.length >= 4 })
+puts(%w[cat dog human].my_all? { |word| word.length >= 4 })
 
 puts 'My Any'
-puts (%w[cat dog human].my_any? { |word| word.length >= 3 })
+puts(%w[cat dog human].my_any? { |word| word.length >= 3 })
 
 puts 'My none'
-puts (%w[cat dog human].my_none? { |word| word.length >= 6 })
+puts(%w[cat dog human].my_none? { |word| word.length >= 6 })
 
 puts 'My count'
 puts([5, 3, 7, 4, 3, 7].my_count(3))
