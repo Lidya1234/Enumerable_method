@@ -80,6 +80,7 @@ module Enumerable
   end
 
   def my_map(proc = nil)
+    return to_enum(:my_map) if !block_given? && proc.nil?
     result = []
     to_a.my_each { |item| result << item if proc.call(item) } if proc
     to_a.my_each { |item| result << yield(item) }
