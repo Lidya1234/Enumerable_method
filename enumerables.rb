@@ -81,8 +81,8 @@ module Enumerable
 
   def my_map(proc = nil)
     result = []
-
-    to_a.my_each { |item| result << item if proc.call(item) }
+    to_a.my_each { |item| result << item if proc.call(item) } if proc
+    to_a.my_each { |item| result << yield(item) }
     result
   end
   # rubocop:disable Metrics/CyclomaticComplexity
