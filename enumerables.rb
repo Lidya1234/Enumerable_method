@@ -97,18 +97,19 @@ module Enumerable
     (raise LocalJumpError if !block_given? && number.nil? && symbol.nil?)
 
     if block_given?
-      number = number.nil? ? to_a[0] : number
-      to_a.my_each { |i| number = yield number, i }
-
+      total = number
+      my_each do |i|
+        total = !total ? i : yield(total, i)
+      end
+     total
     elsif !number.nil? && symbol.nil?
       to_a.my_each { |i| number = yield i }
 
     elsif !symbol.nil?
 
       to_a.my_each { |i| number = number.nil? ? i : number.send(symbol, i) }
-
+      number
     end
-    number
   end
 
   # rubocop:enable Metrics/CyclomaticComplexity
