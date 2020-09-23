@@ -91,10 +91,11 @@ module Enumerable
       symbol = number
       number = nil
     end
-    total = 0
-    if ( !block_given? && number.nil? && symbol.nil? )
-      raise LocalJumpError
-    elsif block_given?
+  
+
+    (raise LocalJumpError if !block_given? && number.nil? && symbol.nil?)
+
+    if block_given?
       total = to_a[0]
       total = number unless number.nil?
       to_a.my_each { |i| total = yield total, i }
@@ -108,11 +109,9 @@ module Enumerable
       to_a.my_each { |i| product = yield i }
       product
     elsif !number.nil? && !symbol.nil?
-      total = number
-      my_each do |i|
-        total.nil? ? total : total.send(symbol, i)
-      end
-      total
+      
+      to_a.my_each { |i| number=number.nil? ? i : number.send(symbol, i)}
+      number
     end
   end
 end
