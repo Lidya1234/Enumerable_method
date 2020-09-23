@@ -101,7 +101,7 @@ module Enumerable
       my_each do |i|
         total = !total ? i : yield(total, i)
       end
-     total
+      total
     elsif !number.nil? && symbol.nil?
       to_a.my_each { |i| number = yield i }
 
@@ -121,34 +121,3 @@ end
 def multiply_els(array)
   array.my_inject(:*) { |x, y| x * y }
 end
-
-# Tests
-
-puts '--My Each'
-[1, 2, 3, 4].my_each { |x| puts x }
-
-puts 'My Each With Index'
-[1, 2, 3, 4].my_each_with_index { |x, i| puts x.to_s + ':' + i.to_s if x != 3 }
-
-puts 'My Select'
-print([5, 6, 7, 8].my_select { |item| item != 6 })
-puts
-puts 'My All'
-puts(%w[cat dog human].my_all? { |word| word.length >= 4 })
-
-puts 'My Any'
-puts(%w[cat dog human].my_any? { |word| word.length >= 3 })
-
-puts 'My none'
-puts(%w[cat dog human].my_none? { |word| word.length >= 6 })
-
-puts 'My count'
-puts([5, 3, 7, 4, 3, 7].my_count(3))
-
-puts 'My map'
-
-print([1, 2, 3, 8, 9, 7].my_map(proc { |item| item >= 4 }))
-
-puts
-puts 'Multiply_els'
-print multiply_els([1, 5, 3])
