@@ -35,7 +35,7 @@ module Enumerable
     to_a.my_each {|i| return false if yield(i) == false}
     return true
     elsif arg.nil?
-    to_a.my_each{ |i| return false if i.nil? || n==false}
+    to_a.my_each{ |i| return false if i.nil? || i==false}
   
     elsif !arg.nil? && (arg.is_a? Class)
     to_a.my_each{|i| return false if i.class != arg && i.class.superclass !=arg}
@@ -47,23 +47,24 @@ module Enumerable
   true
   end
 
-  def my_any?
-    if block_given?
+  def my_any?(arg = nil)
     
-    i = 0
-    ans = false
-    to_a.length.times do
-      ans = yield to_a[i]
-
-      break if ans == true
-
-      i += 1
-    end
-    ans
-  else
-    return true
+    if block_given?
+    to_a.my_each {|i| return true if yield(i) == true}
+    return false
+    elsif arg.nil?
+    to_a.my_each{ |i| return true unless i.nil? || i==false}
+  
+    elsif !arg.nil? && (arg.is_a? Class)
+    to_a.my_each{|i| return true if i.class == arg ||i.class.superclass == arg}
+    elsif !arg.nil? && (arg.is_a? Regexp)
+    to_a.my_each{|i| return true if i.match(arg)}
+    else
+    to_a.my_each{|i| return true if i = arg}
   end
+  false
   end
+end
 
   def my_none?
     return to_enum(:my_none?) unless block_given?
