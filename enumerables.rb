@@ -29,21 +29,22 @@ module Enumerable
     result
   end
 
-  def my_all?(number = nil)
+  def my_all?(arg = nil)
     
     if block_given?
-    to_a.my_each do |i|
-      return false if yield(i) == false
-      return true
-    end
-  elsif 
-    
-    to_a.length >= 1 && !block_given?
+    to_a.my_each {|i| return false if yield(i) == false}
     return true
-  elsif
-      return false
+    elsif arg.nil?
+    to_a.my_each{ |i| return false if i.nil? || n==false}
+  
+    elsif !arg.nil? && (arg.is_a? Class)
+    to_a.my_each{|i| return false if i.class != arg && i.class.superclass !=arg}
+    elsif !arg.nil? && (arg.is_a? Regexp)
+    to_a.my_each{|i| return false unless i.match(arg)}
+    else
+    to_a.my_each{|i| return false if i != arg}
   end
-    
+  true
   end
 
   def my_any?
