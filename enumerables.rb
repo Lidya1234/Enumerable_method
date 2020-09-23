@@ -73,10 +73,12 @@ module Enumerable
     my_each { |i| count += 1 if yield i }
     elsif number.nil?
       count = to_a.length
+    else
+      to_a.my_each { |i| count += 1 if number == i }
     end
     count
   end
-  
+
   def my_map(proc = nil)
     result = []
 
