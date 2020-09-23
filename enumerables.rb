@@ -69,16 +69,14 @@ module Enumerable
 
   def my_count(number = nil)
     count = 0
-    if number.nil?
+    if block_given?
+    my_each { |i| count += 1 if yield i }
+    elsif number.nil?
       count = to_a.length
-    else
-
-      my_each { |i| count += 1 if number == i }
-
-      print count
     end
+    count
   end
-
+  
   def my_map(proc = nil)
     result = []
 
