@@ -1,5 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
 
 module Enumerable
   def my_each
@@ -88,6 +86,8 @@ module Enumerable
     to_a.my_each { |item| result << item if proc.call(item) }
     result
   end
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 
   def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
@@ -112,6 +112,10 @@ module Enumerable
       number
     end
   end
+  
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+
 end
 
 # Multiply Method
@@ -119,9 +123,6 @@ end
 def multiply_els(array)
   array.my_inject(:*) { |x, y| x * y }
 end
-
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
 
 # Tests
 
