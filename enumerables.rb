@@ -92,7 +92,7 @@ module Enumerable
       number = nil
     end
     total = 0
-    if !block_given? && number.nil? && symbol.nil?
+    if ( !block_given? && number.nil? && symbol.nil? )
       raise LocalJumpError
     elsif block_given?
       total = to_a[0]
@@ -100,21 +100,17 @@ module Enumerable
       to_a.my_each { |i| total = yield total, i }
       total
     elsif !symbol.nil? && number.nil?
-      array = to_a
       product = 0
       to_a.my_each { |i| product += i }
       product
     elsif !number.nil? && symbol.nil?
-      array = to_a
       product = number
       to_a.my_each { |i| product = yield i }
       product
-
     elsif !number.nil? && !symbol.nil?
-
       total = number
       my_each do |i|
-        total = nil ? total : total.send(symbol, i)
+        total.nil? ? total : total.send(symbol, i)
       end
       total
     end
