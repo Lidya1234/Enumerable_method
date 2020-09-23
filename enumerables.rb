@@ -29,18 +29,26 @@ module Enumerable
     result
   end
 
-  def my_all?
+  def my_all?(number = nil)
+    
+    if block_given?
     to_a.my_each do |i|
       return false if yield(i) == false
-      else
-        return true
-      end
+      return true
     end
+  elsif 
+    
+    to_a.length >= 1 && !block_given?
+    return true
+  elsif
+      return false
+  end
+    
   end
 
   def my_any?
-    return to_enum(:my_any?) unless block_given?
-
+    if block_given?
+    
     i = 0
     ans = false
     to_a.length.times do
@@ -51,6 +59,9 @@ module Enumerable
       i += 1
     end
     ans
+  else
+    return true
+  end
   end
 
   def my_none?
@@ -133,10 +144,10 @@ puts 'My Select'
 print([5, 6, 7, 8].my_select { |item| item != 6 })
 puts
 puts 'My All'
-puts (%w[cat dog human].my_all? { |word| word.length >= 4 })
+puts (%w[cat dog human].my_all?)
 
 puts 'My Any'
-puts (%w[cat dog human].my_any? { |word| word.length >= 3 })
+puts (%w[cat dog human].my_any?)
 
 puts 'My none'
 puts (%w[cat dog human].my_none? { |word| word.length >= 6 })
