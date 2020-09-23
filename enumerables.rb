@@ -1,3 +1,6 @@
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -91,7 +94,6 @@ module Enumerable
       symbol = number
       number = nil
     end
-  
 
     (raise LocalJumpError if !block_given? && number.nil? && symbol.nil?)
 
@@ -100,17 +102,13 @@ module Enumerable
       total = number unless number.nil?
       to_a.my_each { |i| total = yield total, i }
       total
-    elsif !symbol.nil? && number.nil?
-      product = 0
-      to_a.my_each { |i| product += i }
-      product
+
     elsif !number.nil? && symbol.nil?
-      product = number
-      to_a.my_each { |i| product = yield i }
-      product
-    elsif !number.nil? && !symbol.nil?
-      
-      to_a.my_each { |i| number=number.nil? ? i : number.send(symbol, i)}
+      to_a.my_each { |i| number = yield i }
+
+    elsif !symbol.nil?
+
+      to_a.my_each { |i| number = number.nil? ? i : number.send(symbol, i) }
       number
     end
   end
@@ -121,6 +119,9 @@ end
 def multiply_els(array)
   array.my_inject(:*) { |x, y| x * y }
 end
+
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
 
 # Tests
 
