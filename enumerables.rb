@@ -97,10 +97,8 @@ module Enumerable
     (raise LocalJumpError if !block_given? && number.nil? && symbol.nil?)
 
     if block_given?
-      total = to_a[0]
-      total = number unless number.nil?
-      to_a.my_each { |i| total = yield total, i }
-      total
+      number = number.nil? ? to_a[0] : number
+      to_a.my_each { |i| number = yield number, i }
 
     elsif !number.nil? && symbol.nil?
       to_a.my_each { |i| number = yield i }
@@ -108,9 +106,11 @@ module Enumerable
     elsif !symbol.nil?
 
       to_a.my_each { |i| number = number.nil? ? i : number.send(symbol, i) }
-      number
+
     end
+    number
   end
+
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 end
