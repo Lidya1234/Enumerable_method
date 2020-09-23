@@ -66,32 +66,36 @@ module Enumerable
   end
 end
 
-  def my_none?
-    return to_enum(:my_none?) unless block_given?
+def my_none?(arg = nil)
+    
+  if block_given?
+  to_a.my_each {|i| return false if yield(i) == true}
+  return true
+  elsif arg.nil?
+  to_a.my_each{ |i| return false if i }
+  elsif !arg.nil? && (arg.is_a? Class)
+  to_a.my_each{|i| return false if i.class == arg ||i.class.superclass == arg}
+  elsif !arg.nil? && (arg.is_a? Regexp)
+  to_a.my_each{|i| return false if i.match(arg)}
+  else
+  to_a.my_each{|i| return false if i ==arg}
+end
+true
+end
+end
 
-    i = 0
-    ans = false
-    to_a.length.times do
-      ans = yield to_a[i]
-
-      break if ans == true
-
-      i += 1
-    end
-    !ans
+def my_count(arg = nil)
+  count=0
+  if block_given?
+    to_a.my_each{|i| count+=1 if yield i}
+  elsif !arg.nil?  
+  to_a.my_each { |i| count += 1 if i == arg }
+  else
+  to_a.my_each {|i| count+=1 if i}
   end
-
-  def my_count(number = nil)
-    count = 0
-    if number.nil?
-      count = to_a.length
-    else
-
-      my_each { |i| count += 1 if number == i }
-
-      print count
-    end
-  end
+  return count
+end
+end
 
   def my_map(proc = nil)
     result = []
