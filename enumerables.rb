@@ -32,8 +32,8 @@ module Enumerable
   def my_all?
     to_a.my_each do |i|
       return false if yield(i) == false
+
       return true
-      
     end
   end
 
@@ -86,41 +86,39 @@ module Enumerable
     result
   end
 
- def my_inject(number = nil, symbol = nil)
+  def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
-      symbol=number
-      number=nil
+      symbol = number
+      number = nil
     end
-    total=0
+    total = 0
     if !block_given? && number.nil? && symbol.nil?
       raise LocalJumpError.new
-    elsif block_given? 
-      total=to_a[0]
+    elsif block_given?
+      total = to_a[0]
       total = number if !number.nil?
-      to_a.my_each{|i| total = yield total, i}
-       total
+      to_a.my_each { |i| total = yield total, i}
+      total
     elsif !symbol.nil? && number.nil?
       array = to_a
       product = 0
-      to_a.my_each{|i| product=product + i}
-       product
+      to_a.my_each { |i| product = product + i}
+      product
     elsif !number.nil? && symbol.nil?
       array = to_a
       product = number
-      to_a.my_each {|i| product =yield i}
+      to_a.my_each { |i| product = yield i}
       product
-        
+
     elsif !number.nil? && !symbol.nil?
 
-    total = number
-    my_each do |i|
-    total = nil ? total : total.send(symbol, i)
+      total = number
+      my_each do |i|
+        total = nil ? total : total.send(symbol, i)
+      end
+      total
     end
-   total
-    end
-
   end
-
 end
 
 # Multiply Method
