@@ -97,10 +97,12 @@ def my_count(arg = nil)
 end
 end
 
-  def my_map(proc = nil)
-    result = []
-
-    to_a.my_each { |item| result << item if proc.call(item) }
+def my_map(proc = nil)
+  result = []
+  if block_given?
+  to_a.my_each{|item|  result << yield(item) }
+  elsif to_a.my_each { |item| result << item if proc.call(item) }
+  end
     result
   end
 
@@ -163,7 +165,12 @@ puts([5, 3, 7, 4, 3, 7].my_count(3))
 
 puts 'My map'
 
-print([1, 2, 3, 8, 9, 7].my_map(proc { |item| item >= 4 }))
+p 'my_map'
+arr = [1, 2, 7, 4, 5]
+p arr.my_map { |x| x * x }
+p (1..2).my_map { |x| x + 1 }
+print(arr.my_map(proc { |item| item >= 4 }))
+
 
 puts
 puts 'Multiply_els'
