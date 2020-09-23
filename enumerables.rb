@@ -29,84 +29,64 @@ module Enumerable
     result
   end
 
-  def my_all?(arg = nil)
-    
-    if block_given?
-    to_a.my_each {|i| return false if yield(i) == false}
-    return true
-    elsif arg.nil?
-    to_a.my_each{ |i| return false if i.nil? || i==false}
-  
-    elsif !arg.nil? && (arg.is_a? Class)
-    to_a.my_each{|i| return false if i.class != arg && i.class.superclass !=arg}
-    elsif !arg.nil? && (arg.is_a? Regexp)
-    to_a.my_each{|i| return false unless i.match(arg)}
+  def my_all?
+    to_a.my_each do |i|
+      return false if yield(i) == false
+      return true
+      
+    end
+  end
+
+  def my_any?
+    return to_enum(:my_any?) unless block_given?
+
+    i = 0
+    ans = false
+    to_a.length.times do
+      ans = yield to_a[i]
+
+      break if ans == true
+
+      i += 1
+    end
+    ans
+  end
+
+  def my_none?
+    return to_enum(:my_none?) unless block_given?
+
+    i = 0
+    ans = false
+    to_a.length.times do
+      ans = yield to_a[i]
+
+      break if ans == true
+
+      i += 1
+    end
+    !ans
+  end
+
+  def my_count(number = nil)
+    count = 0
+    if number.nil?
+      count = to_a.length
     else
-    to_a.my_each{|i| return false if i != arg}
-  end
-  true
+
+      my_each { |i| count += 1 if number == i }
+
+      print count
+    end
   end
 
-  def my_any?(arg = nil)
-    
-    if block_given?
-    to_a.my_each {|i| return true if yield(i) == true}
-    return false
-    elsif arg.nil?
-    to_a.my_each{ |i| return true unless i.nil? || i==false}
-  
-    elsif !arg.nil? && (arg.is_a? Class)
-    to_a.my_each{|i| return true if i.class == arg ||i.class.superclass == arg}
-    elsif !arg.nil? && (arg.is_a? Regexp)
-    to_a.my_each{|i| return true if i.match(arg)}
-    else
-    to_a.my_each{|i| return true if i = arg}
-  end
-  false
-  end
-end
+  def my_map(proc = nil)
+    result = []
 
-def my_none?(arg = nil)
-    
-  if block_given?
-  to_a.my_each {|i| return false if yield(i) == true}
-  return true
-  elsif arg.nil?
-  to_a.my_each{ |i| return false if i }
-  elsif !arg.nil? && (arg.is_a? Class)
-  to_a.my_each{|i| return false if i.class == arg ||i.class.superclass == arg}
-  elsif !arg.nil? && (arg.is_a? Regexp)
-  to_a.my_each{|i| return false if i.match(arg)}
-  else
-  to_a.my_each{|i| return false if i ==arg}
-end
-true
-end
-end
-
-def my_count(arg = nil)
-  count=0
-  if block_given?
-    to_a.my_each{|i| count+=1 if yield i}
-  elsif !arg.nil?  
-  to_a.my_each { |i| count += 1 if i == arg }
-  else
-  to_a.my_each {|i| count+=1 if i}
-  end
-  return count
-end
-end
-
-def my_map(proc = nil)
-  result = []
-  if block_given?
-  to_a.my_each{|item|  result << yield(item) }
-  elsif to_a.my_each { |item| result << item if proc.call(item) }
-  end
+    to_a.my_each { |item| result << item if proc.call(item) }
     result
   end
 
-  def my_inject(number = nil, symbol = nil)
+ def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
       symbol=number
       number=nil
@@ -161,10 +141,10 @@ puts 'My Select'
 print([5, 6, 7, 8].my_select { |item| item != 6 })
 puts
 puts 'My All'
-puts (%w[cat dog human].my_all?)
+puts (%w[cat dog human].my_all? { |word| word.length >= 4 })
 
 puts 'My Any'
-puts (%w[cat dog human].my_any?)
+puts (%w[cat dog human].my_any? { |word| word.length >= 3 })
 
 puts 'My none'
 puts (%w[cat dog human].my_none? { |word| word.length >= 6 })
@@ -174,12 +154,7 @@ puts([5, 3, 7, 4, 3, 7].my_count(3))
 
 puts 'My map'
 
-p 'my_map'
-arr = [1, 2, 7, 4, 5]
-p arr.my_map { |x| x * x }
-p (1..2).my_map { |x| x + 1 }
-print(arr.my_map(proc { |item| item >= 4 }))
-
+print([1, 2, 3, 8, 9, 7].my_map(proc { |item| item >= 4 }))
 
 puts
 puts 'Multiply_els'
