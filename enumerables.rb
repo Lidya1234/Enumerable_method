@@ -104,7 +104,7 @@ module Enumerable
 
     result = []
 
-    if block_given?
+    if proc
       to_a.my_each { |item| result << yield(item) }
     else
       to_a.my_each { |item| result << item if proc.call(item) }
