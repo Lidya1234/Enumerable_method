@@ -18,9 +18,13 @@ Enumerable Methods In this project
 
 <img src="screenshot.png" alt="Demo running screen shot">
 ## Built With
- Ruby
- GIT
- VSCODE
+
+- Ruby
+- GIT
+- VSCODE
+ 
+ 
+ 
 
 ## Live Demo
 Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputationalscience#main.rb
