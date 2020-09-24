@@ -3,16 +3,18 @@
 
 Ruby Enumerables project
 Enumerable Methods In this project
--my_each
--my_each_with_index
--my_select
--my_all?
--my_any?
--my_none?
--my_count
--my_map
--my_inject
--multiply_els
+- my_each
+- my_each_with_index
+- my_select
+- my_all?
+- my_any?
+- my_none?
+- my_count
+- my_map
+- my_inject
+- multiply_els
+
+
 
 <img src="screenshot.png" alt="Demo running screen shot">
 ## Built With
