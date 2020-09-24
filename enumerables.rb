@@ -69,18 +69,18 @@ module Enumerable
 
   def my_none?(arg = nil)
     if block_given?
-      to_a.my_each { |i| return false if yield(i) == true}
+      to_a.my_each { |i| return false if yield(i) == true }
       return true
     elsif arg.nil?
       to_a.my_each { |i| return false if i }
 
     elsif !arg.nil? && (arg.is_a? Class)
-      to_a.my_each { |i| return false if [i.class, i.class.superclass].include?(arg)}
+      to_a.my_each { |i| return false if [i.class, i.class.superclass].include?(arg) }
 
     elsif !arg.nil? && (arg.is_a? Regexp)
-      to_a.my_each { |i| return false if i.match(arg)}
+      to_a.my_each { |i| return false if i.match(arg) }
     else
-      to_a.my_each { |i| return false if i == arg}
+      to_a.my_each { |i| return false if i == arg }
     end
     true
   end
@@ -88,11 +88,11 @@ module Enumerable
   def my_count(arg = nil)
     count = 0
     if block_given?
-      to_a.my_each { |i| count += 1 if yield i}
+      to_a.my_each { |i| count += 1 if yield i }
     elsif !arg.nil?
       to_a.my_each { |i| count += 1 if i == arg }
     else
-      to_a.my_each { |i| count += 1 if i}
+      to_a.my_each { |i| count += 1 if i }
     end
     count
   end
