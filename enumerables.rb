@@ -37,12 +37,14 @@ module Enumerable
 
       return true
     elsif arg.nil?
-      to_a.my_each { |i| return false if i.nil? || n == false }
+      to_a.my_each { |i| return false if i.nil? || i == false }
 
     elsif !arg.nil? && (arg.is_a? Class)
       to_a.my_each { |i| return false unless [i.class, i.class.superclass].include?(arg) }
     elsif !arg.nil? && (arg.is_a? Regexp)
       to_a.my_each { |i| return false unless i.match(arg) }
+    elsif !block_given? && arg.nil?
+      return true
     else
       to_a.my_each { |i| return false if i != arg }
     end
