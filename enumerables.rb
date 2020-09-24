@@ -30,14 +30,14 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-    to_a.my_each do |i| 
-       if block_given?
-      return false if yield(i) == false
-       elsif arg
-      return true if arg === i
+    to_a.my_each do |i|
+      if block_given?
+        return false if yield(i) == false
+      elsif arg
+        return true if arg == i
       else
         return true
-       end
+      end
     end
     false
   end
@@ -75,7 +75,7 @@ module Enumerable
   def my_count(number = nil)
     count = 0
     if block_given?
-    my_each { |i| count += 1 if yield i }
+      my_each { |i| count += 1 if yield i }
     elsif number.nil?
       count = to_a.length
     else
@@ -86,6 +86,7 @@ module Enumerable
 
   def my_map(proc = nil)
     return to_enum(:my_map) if !block_given? && proc.nil?
+
     result = []
     to_a.my_each { |item| result << item if proc.call(item) } if proc
     to_a.my_each { |item| result << yield(item) }
