@@ -2,10 +2,19 @@
 
 
 Ruby Enumerables project
+Enumerable Methods In this project
+-my_each
+-my_each_with_index
+-my_select
+-my_all?
+-my_any?
+-my_none?
+-my_count
+-my_map
+-my_inject
+-multiply_els
 
-This project is designed for adding methods inside enumerable modules
-
-
+<img src="screenshot.png" alt="Demo running screen shot">
 ## Built With
  Ruby
  GIT
@@ -17,9 +26,14 @@ Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputation
 
 <h1>Getting Started</h1>
 
-To get a local copy up and running follow these simple example steps.
+#To get a local copy up and running follow these simple example steps.
+git clone https://github.com/Lidya1234/Enumerable_method.git
 
-Prerequisites Text editor,Github profile, Git and Ruby.
+#Prerequisites 
+Text editor
+Github profile
+Git and Ruby.
+
 
 <h2>Authors</h2>
 
