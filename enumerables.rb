@@ -43,8 +43,6 @@ module Enumerable
       to_a.my_each { |i| return false unless [i.class, i.class.superclass].include?(arg) }
     elsif !arg.nil? && (arg.is_a? Regexp)
       to_a.my_each { |i| return false unless i.match(arg) }
-    elsif !block_given? && arg.nil?
-      return true
     else
       to_a.my_each { |i| return false if i != arg }
     end
@@ -100,18 +98,19 @@ module Enumerable
   end
 
   def my_map(proc = nil)
-    return to_enum(:my_map) unless block_given? || !proc.nil?
 
     result = []
-
-    if proc
-      to_a.my_each { |item| result << yield(item) }
+  
+    if block_given? && !proc.nil?
+      to_a.my_each { |item| result << proc.call(item) }
+    elsif block_given? && proc.nil?  
+   to_a.my_each{|item|  result << yield(item) }
     else
-      to_a.my_each { |item| result << item if proc.call(item) }
-
+     to_a.my_each { |item| result <<  proc.call(item) }
+    
     end
     result
-  end
+     end
 
   def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
