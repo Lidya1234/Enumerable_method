@@ -98,19 +98,20 @@ module Enumerable
   end
 
   def my_map(proc = nil)
+    return to_enum(:my_map) unless block_given? || !proc.nil?
 
     result = []
-  
+
     if block_given? && !proc.nil?
       to_a.my_each { |item| result << proc.call(item) }
-    elsif block_given? && proc.nil?  
-   to_a.my_each{|item|  result << yield(item) }
+    elsif block_given? && proc.nil?
+      to_a.my_each { |item| result << yield(item) }
     else
-     to_a.my_each { |item| result <<  proc.call(item) }
-    
+      to_a.my_each { |item| result << proc.call(item) }
+
     end
     result
-     end
+  end
 
   def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
@@ -119,8 +120,7 @@ module Enumerable
     end
     (raise LocalJumpError if !block_given? && number.nil? && symbol.nil?)
     if block_given?
-      number = number.nil? ? to_a[0] : number
-      to_a.my_each { |i| number = yield number, i }
+      to_a.my_each { |item| number = number.nil? ? item : yield(number, item) }
 
     elsif !number.nil? && symbol.nil?
       to_a.my_each { |i| number = yield i }
