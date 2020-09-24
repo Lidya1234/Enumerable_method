@@ -1,5 +1,5 @@
 # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -33,14 +33,14 @@ module Enumerable
 
   def my_all?(arg = nil)
     if block_given?
-      to_a.my_each { |i| return false if yield(i) == false}
+      to_a.my_each { |i| return false if yield(i) == false }
 
       return true
     elsif arg.nil?
-      to_a.my_each { |i| return false if i.nil? || n == false}
+      to_a.my_each { |i| return false if i.nil? || n == false }
 
     elsif !arg.nil? && (arg.is_a? Class)
-      to_a.my_each { |i| return false if i.class != arg && i.class.superclass != arg}
+      to_a.my_each { |i| return false if ![i.class, i.class.superclass].include?(arg) }
     elsif !arg.nil? && (arg.is_a? Regexp)
       to_a.my_each { |i| return false unless i.match(arg)}
     else
@@ -49,6 +49,7 @@ module Enumerable
     true
   end
 
+  
   def my_any?(arg = nil)
     if block_given?
       to_a.my_each { |i| return true if yield(i) == true}
@@ -58,11 +59,11 @@ module Enumerable
       to_a.my_each { |i| return true unless i.nil? || i == false}
 
     elsif !arg.nil? && (arg.is_a? Class)
-      to_a.my_each { |i| return true if i.class == arg || i.class.superclass == arg}
+      to_a.my_each { |i| return true if [i.class, i.class.superclass].include?(arg)}
     elsif !arg.nil? && (arg.is_a? Regexp)
       to_a.my_each { |i| return true if i.match(arg)}
     else
-      to_a.my_each { |i| return true if i = arg}
+      to_a.my_each { |i| return true if i == arg}
     end
     false
   end
@@ -75,7 +76,7 @@ module Enumerable
       to_a.my_each { |i| return false if i }
 
     elsif !arg.nil? && (arg.is_a? Class)
-      to_a.my_each { |i| return false if i.class == arg || i.class.superclass == arg}
+      to_a.my_each { |i| return false if [i.class, i.class.superclass].include?(arg)}
 
     elsif !arg.nil? && (arg.is_a? Regexp)
       to_a.my_each { |i| return false if i.match(arg)}
@@ -94,7 +95,7 @@ module Enumerable
     else
       to_a.my_each { |i| count += 1 if i}
     end
-    return count
+    count
   end
 
   def my_map(proc = nil)
@@ -110,7 +111,6 @@ module Enumerable
     end
     result
   end
-  
 
   def my_inject(number = nil, symbol = nil)
     if !number.nil? && symbol.nil? && number.is_a?(String) || number.is_a?(Symbol)
