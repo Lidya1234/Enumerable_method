@@ -29,12 +29,17 @@ module Enumerable
     result
   end
 
-  def my_all?
-    to_a.my_each do |i|
+  def my_all?(arg = nil)
+    to_a.my_each do |i| 
+       if block_given?
       return false if yield(i) == false
-
-      return true
+       elsif arg
+      return true if arg === i
+      else
+        return true
+       end
     end
+    false
   end
 
   def my_any?
