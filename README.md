@@ -36,7 +36,7 @@ git clone  https://github.com/Lidya1234/Enumerable_method.git
 
 ## How to run tests
 - cd 
-- In command editor write gem install rspec .
+- In command line editor write gem install rspec .
 - You will find the enumerables_spec.rb in Enumerable_method/spec folder .
 - To run it  in command line editor write  rspec spec/enumerables_spec.rb .
 - Then it will display the results like what you see in the image below.
@@ -45,10 +45,10 @@ git clone  https://github.com/Lidya1234/Enumerable_method.git
 <img src="screenshot2.png" alt="Demo running screen shot2">
 
 #Prerequisites
-Text editor
-Github profile
-Git and Ruby
-Rspec.
+-Text editor
+-Github profile
+-Git and Ruby
+-Rspec.
 
 
 <h2>Authors</h2>
