@@ -96,3 +96,37 @@ describe Enumerable do
       expect(num_array.my_map { |item| item * 4 }).not_to eql(num_array)
     end
   end
+
+  describe '#my_map' do
+    it 'If no block is given, an enumerator is returned instead.' do
+      expect(num_array.my_map).to be_an Enumerator
+    end
+
+    it 'Returns a new array with the results of running block once for every element in enum.' do
+      expect(num_array.my_map { |item| item * 4 }).not_to eql(num_array)
+    end
+  end
+
+  describe '#my_inject' do
+    it 'Combines all elements of enum by applying a binary operation, specified by a block or a symbol that names a method or operator.' do
+      expect(num_range.my_inject(:+)).to eql(45)
+    end
+
+    it 'If you specify a block, then for each element in enum the block is passed an accumulator value (memo) and the element.' do
+      expect(num_range.my_inject { |sum, n| sum + n }).to eql(45)
+    end
+
+    it 'If you specify a symbol instead, then each element in the collection will be passed to the named method of memo.' do
+      expect(num_range.my_inject(1, :*)).to eql(151_200)
+    end
+    it 'If no initial value for memo, then the first element of collection is used as the initial value of memo.' do
+      expect(strings_array.my_inject { |memo, word| memo.length > word.length ? memo : word }).to eql('sheep')
+    end
+  end
+
+  describe 'multiply_els' do
+    it 'Multiply all the elements inside an array and return the value' do
+      expect(multiply_els(num_array)).to eql(120)
+    end
+  end
+end
