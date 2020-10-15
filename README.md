@@ -29,9 +29,19 @@ Enumerable Methods In this project
 <h1>Getting Started</h1>
 
 #To get a local copy up and running follow these simple example steps.
-cd (folder)
-git clone https://github.com/Lidya1234/Enumerable_method.git
+cd 
 
+git clone  https://github.com/Lidya1234/Enumerable_method.git
+
+
+## How to run tests
+- cd 
+- In command editor write gem install rspec .
+- You will find the enumerables_spec.rb in Enumerable_method/spec folder .
+- To run it  in command line editor write  rspec spec/enumerables_spec.rb .
+- Then it will display the results like what you see in the image below.
+
+ 
 <img src="screenshot2.png" alt="Demo running screen shot2">
 
 #Prerequisites
