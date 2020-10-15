@@ -17,28 +17,38 @@ Enumerable Methods In this project
 
 
 <img src="screenshot.png" alt="Demo running screen shot">
+
 ## Built With
 
 - Ruby
 - GIT
 - VSCODE
- 
- 
- 
+- RSPEC
 
-## Live Demo
-Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputationalscience#main.rb
-)
 
 <h1>Getting Started</h1>
 
 #To get a local copy up and running follow these simple example steps.
-git clone https://github.com/Lidya1234/Enumerable_method.git
+cd 
 
-#Prerequisites 
-Text editor
-Github profile
-Git and Ruby.
+git clone  https://github.com/Lidya1234/Enumerable_method.git
+
+
+## How to run tests
+- cd 
+- In command line editor write gem install rspec .
+- You will find the enumerables_spec.rb in Enumerable_method/spec folder .
+- To run it  in command line editor write  rspec spec/enumerables_spec.rb .
+- Then it will display the results like what you see in the image below.
+
+ 
+<img src="screenshot2.png" alt="Demo running screen shot2">
+
+## Prerequisites
+-Text editor
+-Github profile
+-Git and Ruby
+-Rspec.
 
 
 <h2>Authors</h2>
@@ -54,6 +64,10 @@ Git and Ruby.
 - Github: [@Mina-github ](https://github.com/coldatlas)
 - Twitter: [@Mina-twitter](https://twitter.com/coldyatlas)
 - Linkedin: [Mina-linkedin-link](https://www.linkedin.com/in/coldyatlas/)
+
+👤 Author3
+- Github: [@Adewunmi97-github ](https://github.com/Adewunmi97)
+- Twitter: [@ShonibareC-twitter](https://twitter.com/ShonibareC)
 
 ## 🤝 Contributing
 
