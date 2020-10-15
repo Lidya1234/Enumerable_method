@@ -55,19 +55,19 @@ describe Enumerable do
     end
 
     it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(num_array.my_all? Integer).to eql(num_array.all? Integer)
+      expect(num_array.my_all?(Integer)).to eql(num_array.all?(Integer))
     end
     it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(num_array.my_all? Numeric).to eql(num_array.all? Numeric)
+      expect(num_array.my_all?(Numeric)).to eql(num_array.all?(Numeric))
     end
     it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(strings_array.my_all? String).to eql(strings_array.all? String)
+      expect(strings_array.my_all?(String)).to eql(strings_array.all?(String))
     end
     it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(strings_array.my_all? /d/ ).to eql(strings_array.all? /d/ )
+      expect(strings_array.my_all?(/d/)).to eql(strings_array.all?(/d/))
     end
     it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(strings_array.my_all? /z/).to eql(strings_array.all? /z/)
+      expect(strings_array.my_all?(/z/)).to eql(strings_array.all?(/z/))
     end
     it 'Passes each element of the collection to the given block, returns true if the block returns true' do
       expect(strings_array.my_all? { |word| word.length >= 4 }).not_to eql(true)
@@ -86,19 +86,19 @@ describe Enumerable do
       expect(mixed_array.my_any?(Integer)).to eql(true)
     end
     it 'If a class is given it checks it if it gives same result as the .any enumerable.' do
-      expect(num_array.my_any? Integer).to eql(num_array.any? Integer)
+      expect(num_array.my_any?(Integer)).to eql(num_array.any?(Integer))
     end
     it 'If a class is given it checks it if it gives same result as the .any enumerable.' do
-      expect(num_array.my_any? Numeric).to eql(num_array.any? Numeric)
+      expect(num_array.my_any?(Numeric)).to eql(num_array.any?(Numeric))
     end
     it 'If a class is given it checks it if it gives same result as the .any enumerable.' do
-      expect(strings_array.my_any? String).to eql(strings_array.any? String)
+      expect(strings_array.my_any?(String)).to eql(strings_array.any?(String))
     end
     it 'If a class is given it checks it if it gives same result as the .any enumerable.' do
-      expect(strings_array.my_any? /d/ ).to eql(strings_array.any? /d/ )
+      expect(strings_array.my_any?(/d/)).to eql(strings_array.any?(/d/))
     end
     it 'If a class is given it checks it if it gives same result as the .any enumerable.' do
-      expect(strings_array.my_any? /z/).to eql(strings_array.any? /z/)
+      expect(strings_array.my_any?(/z/)).to eql(strings_array.any?(/z/))
     end
   end
 
@@ -117,20 +117,20 @@ describe Enumerable do
     it 'If a pattern is supplied method returns whether pattern === element for none of the collection members.' do
       expect(mixed_array.my_none?(Float)).to eql(true)
     end
-    it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(num_array.my_none? Integer).to eql(num_array.none? Integer)
-    end
-    it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(num_array.my_none? Numeric).to eql(num_array.none? Numeric)
-    end
-    it 'If a class is given it checks it if it gives same result as the .all enumerable.' do
-      expect(strings_array.my_none? String).to eql(strings_array.none? String)
+    it 'If a class is given it checks it if it gives same result as the .none enumerable.' do
+      expect(num_array.my_none?(Integer)).to eql(num_array.none?(Integer))
     end
     it 'If a class is given it checks it if it gives same result as the .none enumerable.' do
-      expect(strings_array.my_none? /d/ ).to eql(strings_array.none? /d/ )
+      expect(num_array.my_none?(Numeric)).to eql(num_array.none?(Numeric))
     end
     it 'If a class is given it checks it if it gives same result as the .none enumerable.' do
-      expect(strings_array.my_none? /z/).to eql(strings_array.none? /z/)
+      expect(strings_array.my_none?(String)).to eql(strings_array.none?(String))
+    end
+    it 'If a class is given it checks it if it gives same result as the .none enumerable.' do
+      expect(strings_array.my_none?(/d/)).to eql(strings_array.none?(/d/))
+    end
+    it 'If a class is given it checks it if it gives same result as the .none enumerable.' do
+      expect(strings_array.my_none?(/z/)).to eql(strings_array.none?(/z/))
     end
   end
 
