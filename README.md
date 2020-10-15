@@ -17,7 +17,7 @@ Enumerable Methods In this project
 
 
 <img src="screenshot.png" alt="Demo running screen shot">
-<img src="screenshot2.png" alt="Demo running screen shot2">
+
 ## Built With
 
 - Ruby
@@ -29,7 +29,10 @@ Enumerable Methods In this project
 <h1>Getting Started</h1>
 
 #To get a local copy up and running follow these simple example steps.
+cd (folder)
 git clone https://github.com/Lidya1234/Enumerable_method.git
+
+<img src="screenshot2.png" alt="Demo running screen shot2">
 
 #Prerequisites
 Text editor
