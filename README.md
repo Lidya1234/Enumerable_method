@@ -26,12 +26,6 @@ Enumerable Methods In this project
 - RSPEC
 
 
-
-
-## Live Demo
-Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputationalscience#main.rb
-)
-
 <h1>Getting Started</h1>
 
 #To get a local copy up and running follow these simple example steps.
