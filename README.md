@@ -44,7 +44,7 @@ git clone  https://github.com/Lidya1234/Enumerable_method.git
  
 <img src="screenshot2.png" alt="Demo running screen shot2">
 
-#Prerequisites
+## Prerequisites
 -Text editor
 -Github profile
 -Git and Ruby
