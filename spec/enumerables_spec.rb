@@ -58,4 +58,41 @@ describe Enumerable do
     end
   end
 
-end
+
+  describe '#my_none' do
+    it 'If the block is not given, none? will return true only if none of the collection members is true.' do
+      expect(bool_array.my_none?).to eql(false)
+    end
+
+    it 'Passes each element of the collection to the given block. The method returns true if the block never returns true for all elements.' do
+      expect(strings_array.my_none? { |word| word.length == 2 }).not_to eql(false)
+    end
+
+    it 'If instead a pattern is supplied, the method returns whether pattern === element for none of the collection members.' do
+      expect(mixed_array.my_none?(Float)).to eql(true)
+    end
+  end
+
+  describe '#my_count' do
+    it 'Returns the number of items in enum through enumeration.' do
+      expect(bool_array.my_count).to eql(3)
+    end
+
+    it 'If an argument is given, the number of items in enum that are equal to item are counted.' do
+      expect(num_array.my_count(2)).to eql(1)
+    end
+
+    it 'If a block is given, it counts the number of elements yielding a true value.' do
+      expect(num_array.my_count(&:odd?)).to eql(3)
+    end
+  end
+
+  describe '#my_map' do
+    it 'If no block is given, an enumerator is returned instead.' do
+      expect(num_array.my_map).to be_an Enumerator
+    end
+
+    it 'Returns a new array with the results of running block once for every element in enum.' do
+      expect(num_array.my_map { |item| item * 4 }).not_to eql(num_array)
+    end
+  end
