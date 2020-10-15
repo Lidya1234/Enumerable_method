@@ -17,7 +17,7 @@ describe Enumerable do
     end
   end
 
-  
+
   describe '#my_each_with_index' do
     it 'if no block is given an enum is returned' do
       expect(num_array.my_each_with_index).to be_an Enumerator
@@ -37,3 +37,25 @@ describe Enumerable do
       expect(num_array.select(&:even?)).not_to eql(num_array)
     end
   end
+
+  describe '#my_all?' do
+    it 'If block not given returns true when none of the collection members are false or nil.' do
+      expect(bool_array.my_all?).to eql(true)
+    end
+
+    it 'Passes each element of the collection to the given block. The method returns true if the block never returns false or nil' do
+      expect(strings_array.my_all? { |word| word.length >= 4 }).not_to eql(true)
+    end
+  end
+
+  describe '#my_any?' do
+    it 'If block not given returns true if at least one of the collection members is not false or nil.' do
+      expect(bool_array.my_any?).to eql(true)
+    end
+
+    it 'Passes each element of the collection to the given block. The method returns true if the block ever returns a value other than false or nil' do
+      expect(mixed_array.my_any?(Integer)).to eql(true)
+    end
+  end
+
+end
