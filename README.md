@@ -17,14 +17,16 @@ Enumerable Methods In this project
 
 
 <img src="screenshot.png" alt="Demo running screen shot">
+<img src="screenshot2.png" alt="Demo running screen shot2">
 ## Built With
 
 - Ruby
 - GIT
 - VSCODE
- 
- 
- 
+- RSPEC
+
+
+
 
 ## Live Demo
 Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputationalscience#main.rb
@@ -35,10 +37,11 @@ Live Demo : [The-livedemo-link](https://repl.it/@MinaAnwar/MicroPettyComputation
 #To get a local copy up and running follow these simple example steps.
 git clone https://github.com/Lidya1234/Enumerable_method.git
 
-#Prerequisites 
+#Prerequisites
 Text editor
 Github profile
-Git and Ruby.
+Git and Ruby
+Rspec.
 
 
 <h2>Authors</h2>
@@ -54,6 +57,10 @@ Git and Ruby.
 - Github: [@Mina-github ](https://github.com/coldatlas)
 - Twitter: [@Mina-twitter](https://twitter.com/coldyatlas)
 - Linkedin: [Mina-linkedin-link](https://www.linkedin.com/in/coldyatlas/)
+
+👤 Author3
+- Github: [@Adewunmi97-github ](https://github.com/Adewunmi97)
+- Twitter: [@ShonibareC-twitter](https://twitter.com/ShonibareC)
 
 ## 🤝 Contributing
 
